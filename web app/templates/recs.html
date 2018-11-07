@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+
+
+  <link rel="stylesheet" href="static/styles/style.css" type="text/css">
+
+</head>
+<body>
+  <div class="login-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Top 10 Songs</label>
+    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Your songs</label>
+    <div >
+        {%if correct%}
+            {% for song in songlist %}
+                <ul><li><a href="index">{{song}}</a></li></ul>
+            {% endfor %}
+        {%endif%}
+    </div>
+  </div>
+
+</body>
+</html>
