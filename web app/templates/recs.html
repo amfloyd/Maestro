@@ -2,24 +2,151 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Welcome</title>
+  <title>Home</title>
 
 
   <link rel="stylesheet" href="static/styles/style.css" type="text/css">
 
+    <style>
+.collapsible {
+    background-color: #A9A9A9;
+    border-color: #2f435e;
+    color: black;
+    cursor: pointer;
+    padding: 18px;
+    width: 50%;
+    border: 2p;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: #555;
+}
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #2f435e;
+}
+</style>
+
+
 </head>
 <body>
+
   <div class="login-html">
+      <!--<input id="tab-3" type="radio" name="tab" class="sign-up"><label for="tab-3" class="tab">Youtube Search</label>-->
     <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Top 10 Songs</label>
-    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Your songs</label>
-    <div >
+    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Search</label>
+    <!--<input id="tab-3" type="radio" name="tab" class="sign-up"><label for="tab-3" class="tab">Youtube Search</label>-->
+    <div class="login-form">
+
+        <form class="sign-up-htm" action="/song" method="POST">
+        <div class="group">
+          <label for="song" class="label">Song</label>
+          <input id="song" name="song" type="text" class="input">
+        </div>
+        <div class="group">
+          <input type="submit" class="button" value="Submit">
+        </div>
+            <div class="group">
+          <input type="submit" class="button" formaction="/youtube"  value="Search on Youtube">
+        </div>
+        <div class="hr"></div>
+      </form>
+
+        <div class="sign-in-htm">
         {%if correct%}
-            {% for song in songlist %}
-                <ul><li><a href="index">{{song}}</a></li></ul>
-            {% endfor %}
+
+               <button id=0 onclick="init(this.id)"  class="collapsible">{{songlist[0]}}</button>
+                <div class="content" id="results0"></div>
+             <button id=1 onclick="init(this.id)"  class="collapsible">{{songlist[1]}}</button>
+                <div class="content" id="results1"></div>
+             <button id=2 onclick="init(this.id)"  class="collapsible">{{songlist[2]}}</button>
+                <div class="content" id="results2"></div>
+             <button id=3 onclick="init(this.id)"  class="collapsible">{{songlist[3]}}</button>
+                <div class="content" id="results3"></div>
+             <button id=4 onclick="init(this.id)"  class="collapsible">{{songlist[4]}}</button>
+                <div class="content" id="results4"></div>
+             <button id=5 onclick="init(this.id)"  class="collapsible">{{songlist[5]}}</button>
+                <div class="content" id="results5"></div>
+             <button id=6 onclick="init(this.id)"  class="collapsible">{{songlist[6]}}</button>
+                <div class="content" id="results6"></div>
+             <button id=7 onclick="init(this.id)"  class="collapsible">{{songlist[7]}}</button>
+                <div class="content" id="results7"></div>
+             <button id=8 onclick="init(this.id)"  class="collapsible">{{songlist[8]}}</button>
+                <div class="content" id="results8"></div>
+             <button id=9 onclick="init(this.id)"  class="collapsible">{{songlist[9]}}</button>
+                <div class="content" id="results9"></div>
+
         {%endif%}
+        </div>
     </div>
+
   </div>
 
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+
+<script >
+    function init(id) {
+    gapi.client.setApiKey("AIzaSyAnDQyGzU6KSIlio7MoqjK8sg_zNGcB4gg");
+    gapi.client.load("youtube", "v3", function() {
+        getvid(id)
+    });
+}
+
+    function tplawesome(e,t){res=e;for(var n=0;n<t.length;n++){res=res.replace(/\{\{(.*?)\}\}/g,function(e,r){return t[n][r]})}return res}
+
+
+   function getvid(id) {
+       var search=document.getElementById(id).innerText
+       // console.log("reached here",songvid.innerText)
+       var request = gapi.client.youtube.search.list({
+            part: "snippet",
+            type: "video",
+            // q: encodeURIComponent($("#songvid.innerText").val()).replace(/%20/g, "+"),
+           q: search,
+            maxResults: 3,
+            order: "relevance",
+       });
+       request.execute(function(response) {
+           var string = "results" + id
+          var results = response.result;
+          $("#"+string).html("");
+          $.each(results.items, function(index, item) {
+              $.get("/display", function(data) {
+                $("#"+string).append(tplawesome(data, [{"title":item.snippet.title, "videoid":item.id.videoId}]));
+                // document.getElementById("results").innerHTML
+            });
+          });
+       });
+
+};
+
+
+
+</script>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 </body>
 </html>

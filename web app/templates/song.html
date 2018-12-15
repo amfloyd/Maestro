@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+
+
+  <link rel="stylesheet" href="static/styles/style.css" type="text/css">
+
+</head>
+<body>
+  <div class="login-html">
+
+                {%if not empty%}
+                <li>{{title}}</li>
+                <li>{{release}}</li>
+                <li>{{artist}}</li>
+                <li>{{year}}</li>
+                {%else%}
+                <div class="users" style="text-align: center;">
+                    <h2>Song doesn't exist in the database.</h2>
+                </div>
+                {%endif%}
+
+  </div>
+
+</body>
+</html>
