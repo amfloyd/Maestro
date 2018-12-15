@@ -62,3 +62,6 @@ def display():
 def home():
     mostpop = joblib.load('mostpop.pkl')
     return render_template('recs.html',correct=True,songlist=mostpop)
+
+if __name__ == '__main__':
+    app.run()
