@@ -4,10 +4,11 @@ certifi==2018.11.29
 cffi==1.11.5
 chardet==3.0.4
 Click==7.0
-conda<=4.5.11
+conda==4.5.11
 config==0.4.0
 cryptography==2.4.1
 cycler==0.10.0
+Cython==0.29.2
 Flask==1.0.2
 flask-heroku==0.1.9
 Flask-SQLAlchemy==2.3.2
@@ -22,7 +23,7 @@ Jinja2==2.10
 kiwisolver==1.0.1
 MarkupSafe==1.1.0
 matplotlib==3.0.1
-mkl-fft<=1.0.6
+mkl-fft==1.0.6
 mkl-random==1.0.1
 numpy==1.15.4
 oauth2client==4.1.3
