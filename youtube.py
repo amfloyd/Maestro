@@ -2,8 +2,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from oauth2client.tools import argparser
 import pandas as pd
-import pprint
-import matplotlib.pyplot as pd
+#import pprint
 
 DEVELOPER_KEY = "AIzaSyAnDQyGzU6KSIlio7MoqjK8sg_zNGcB4gg"
 YOUTUBE_API_SERVICE_NAME = "youtube"
