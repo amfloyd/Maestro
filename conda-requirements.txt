@@ -26,6 +26,7 @@ libffi=3.2.1=h475c297_4
 libgfortran=3.0.1=h93005f0_2
 libpng=1.6.35=ha441bb4_0
 markupsafe=1.1.0=py37h1de35cc_0
+matplotlib=3.0.1=py37h54f8f79_0
 mkl=2018.0.3=1
 mkl_fft=1.0.6=py37hb8a8100_0
 mkl_random=1.0.1=py37h5d10147_1
