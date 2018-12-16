@@ -4,7 +4,6 @@ certifi==2018.11.29
 cffi==1.11.5
 chardet==3.0.4
 Click==7.0
-conda==4.5.11
 config==0.4.0
 cryptography==2.4.1
 cycler==0.10.0

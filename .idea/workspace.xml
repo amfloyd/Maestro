@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a5f6b6b-5ccf-4572-9ea9-c6d13e6be54e" name="Default" comment="" />
+    <list default="true" id="5a5f6b6b-5ccf-4572-9ea9-c6d13e6be54e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/conda-requirements.txt" beforeDir="false" />
+    </list>
     <ignored path="Maestro.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
