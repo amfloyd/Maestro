@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a5f6b6b-5ccf-4572-9ea9-c6d13e6be54e" name="Default" comment="" />
+    <list default="true" id="5a5f6b6b-5ccf-4572-9ea9-c6d13e6be54e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+    </list>
     <ignored path="Maestro.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,30 +32,7 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="database.db" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="database.db" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="database.db" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="database.db" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="main: schema" type="90513b60:SqliteImplModel$Schema" />
-        <item name="sqlite_master: table" type="ffe0bd85:SqliteImplModel$Table" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="ExecutionTargetDialog">
@@ -84,7 +63,7 @@
           <entry key="ipynb" value="2" />
           <entry key="js" value="1" />
           <entry key="pkl" value="1" />
-          <entry key="py" value="15" />
+          <entry key="py" value="16" />
           <entry key="songinfo" value="1" />
           <entry key="sql" value="12" />
           <entry key="sqlite_master" value="2" />
@@ -100,7 +79,7 @@
           <entry key="HTML" value="7" />
           <entry key="JavaScript" value="1" />
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="14" />
+          <entry key="Python" value="15" />
           <entry key="SQL" value="3" />
           <entry key="Scratch" value="9" />
           <entry key="UML" value="1" />
@@ -111,7 +90,7 @@
           <entry key="css" value="127" />
           <entry key="html" value="4408" />
           <entry key="js" value="25" />
-          <entry key="py" value="8878" />
+          <entry key="py" value="8902" />
           <entry key="sql" value="205" />
           <entry key="txt" value="7" />
         </counts>
@@ -122,7 +101,7 @@
           <entry key="HTML" value="4408" />
           <entry key="JavaScript" value="25" />
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="8878" />
+          <entry key="Python" value="8902" />
           <entry key="Scratch" value="205" />
         </counts>
       </usages-collector>
@@ -140,8 +119,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-504">
-              <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+            <state relative-caret-position="465">
+              <caret line="31" column="41" lean-forward="true" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
+              <folding>
+                <element signature="e#22#125#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#22#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -203,8 +196,8 @@
         <option value="$PROJECT_DIR$/web app/templates/recs.html" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/53d7b64a-e314-4f7a-b305-4f8ca6118423/console.sql" />
         <option value="$PROJECT_DIR$/web app/app.py" />
-        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/wsgi.py" />
+        <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
   </component>
@@ -467,8 +460,8 @@
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="9" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="11" weight="0.32673267" />
-      <window_info anchor="bottom" id="Database Console" order="12" visible="true" weight="0.4138614" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" weight="0.32673267" />
+      <window_info anchor="bottom" id="Database Console" order="12" weight="0.4138614" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -502,7 +495,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/webinterface/manage.py" />
     <entry file="file://$PROJECT_DIR$/webinterface/webinterface/__init__.py" />
     <entry file="file://$PROJECT_DIR$/webinterface/webinterface/settings.py" />
     <entry file="file://$PROJECT_DIR$/webinterface/webinterface/wsgi.py" />
@@ -699,10 +691,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-504">
-          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+        <state relative-caret-position="465">
+          <caret line="31" column="41" lean-forward="true" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
+          <folding>
+            <element signature="e#22#125#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

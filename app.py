@@ -22,19 +22,20 @@ def signup():
     if request.method == 'POST':
         username = request.form['uname']
         password = request.form['pwd']
-        check=dbio.insertUser(username, password)
-        return render_template('index.html',check=check)
+        #check=dbio.insertUser(username, password)
+        return render_template('index.html',check=True)
 
 @app.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
         user = request.form['username']
         passwd = request.form['password']
-        user,pwd = dbio.retrieveUsers(user,passwd)
-        if user == user and passwd == pwd:
-            return redirect('home')
-        else:
-            return render_template('index.html', wrong=True)
+        # user,pwd = dbio.retrieveUsers(user,passwd)
+        # if user == user and passwd == pwd:
+        #     return redirect('home')
+        # else:
+        #     return render_template('index.html', wrong=True)
+        return redirect('home')
 
 @app.route('/song', methods=['POST'])
 def getinfo():
