@@ -6,7 +6,12 @@ from sklearn.externals import joblib
 import db as dbio
 import youtube as yt
 import logging
+from flask_sqlalchemy import SQLAlchemy
+from flask_heroku import Heroku
 app = Flask(__name__)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+heroku = Heroku(app)
+db = SQLAlchemy(app)
 
 @app.route('/')
 def index():
