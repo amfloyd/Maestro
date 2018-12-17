@@ -9,8 +9,71 @@
 
 </head>
 <body>
-  <div>
-  <div class="login-html">
+<div id="fb-root"></div>
+
+<script >
+    function statusChangeCallback(response) {
+
+    if (response.status === 'connected') {
+      testAPI();
+    } else {
+      document.getElementById('status').innerHTML = 'Please log ' +  'into this app.';
+    }
+  }
+
+
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  function logout(){
+      console.log("here")
+      FB.logout(function(response) {
+   // Person is now logged out
+});
+  }
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1181204532036224',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v3.2'
+    });
+
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    window.location.assign("/home")
+    });
+
+
+  }
+</script>
+
+  <div class="split left">
+      <div class="login-html">
     <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
     <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
     <div class="login-form">
@@ -33,7 +96,10 @@
         <div class="hr"></div>
         <div class="foot-lnk">
           <a href="#forgot">Forgot Password?</a>
+
         </div>
+
+       <!--<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>-->
       </form>
       <form class="sign-up-htm" action="/signup" method="POST">
         <div class="group">
@@ -53,12 +119,28 @@
         </div>
         <div class="hr"></div>
         <div class="foot-lnk">
-          <label for="tab-1">Already a member?</a>
+          <label for="tab-1">Already a member?</label>
         </div>
       </form>
     </div>
+
+  </div>
   </div>
 </div>
+
+<div class="split right">
+    <div class="fblogin">
+     <!--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>-->
+        <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    </div>
+    <div id="status" class="fblogin"></div>
+</div>
+</div>
+
+
+
+
+
 
 
 {%if check%}
