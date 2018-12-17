@@ -78,7 +78,7 @@ body {
         /*.rightcol::after{*/
             /*background-color:#C48F65;*/
 
-        }
+
         .wrapper {
   display: grid;
 
@@ -257,6 +257,45 @@ body {
     </div>
 </div>
 
+<script >
+    function init(id) {
+    gapi.client.setApiKey("AIzaSyAnDQyGzU6KSIlio7MoqjK8sg_zNGcB4gg");
+    gapi.client.load("youtube", "v3", function() {
+        getvid(id)
+    });
+}
+
+    function tplawesome(e,t){res=e;for(var n=0;n<t.length;n++){res=res.replace(/\{\{(.*?)\}\}/g,function(e,r){return t[n][r]})}return res}
+
+
+   function getvid(id) {
+       var search=document.getElementById(id).innerText
+       // console.log("reached here",songvid.innerText)
+       var request = gapi.client.youtube.search.list({
+            part: "snippet",
+            type: "video",
+            // q: encodeURIComponent($("#songvid.innerText").val()).replace(/%20/g, "+"),
+           q: search,
+            maxResults: 3,
+            order: "relevance",
+       });
+       request.execute(function(response) {
+           var string = "results" + id
+          var results = response.result;
+          $("#"+string).html("");
+          $.each(results.items, function(index, item) {
+              $.get("/display", function(data) {
+                $("#"+string).append(tplawesome(data, [{"title":item.snippet.title, "videoid":item.id.videoId}]));
+                // document.getElementById("results").innerHTML
+            });
+          });
+       });
+
+};
+
+
+
+</script>
 
 
 
@@ -306,7 +345,10 @@ body {
     });
     });
 
+
 });
+
+
 
 function outputData(op) {
     document.getElementById("item1").innerHTML="Artist";
@@ -378,6 +420,8 @@ for (i = 0; i < coll.length; i++) {
     }
   });
 }
+    
 </script>
+<script src="https://apis.google.com/js/client.js?onload=init"></script>
 </body>
 </html>
