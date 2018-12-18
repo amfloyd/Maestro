@@ -58,3 +58,5 @@ Werkzeug==0.14.1
 autoenv
 flask_script
 flask_migrate
+tweepy
+
