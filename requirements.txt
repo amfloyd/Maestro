@@ -59,4 +59,5 @@ autoenv
 flask_script
 flask_migrate
 tweepy
+uwsgi
 
