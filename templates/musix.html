@@ -25,6 +25,21 @@
     background-color: #555;
 }
 
+        .image-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+img {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+}
+
 .content {
     padding: 0 18px;
     display: none;
@@ -32,53 +47,7 @@
     background-color: #2f435e;
 }
 
-body {
-    display: grid;
-    grid-template-rows:1fr;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:'header header'
-                        'searchmusix display';
-}
-        .leftcol{
-            grid-area: searchmusix;
-            background-color:#2f435e;
-        }
 
-        .rightcol{
-            grid-area: display;
-            margin-top: 120px;
-            margin-left: 150px;
-            background-color: #34495E;
-            display:grid ;
-            grid-auto-flow: column;
-            grid-template-areas:'artist album year genre rating'
-                        'art1 alb1 year1 genre1 rating1';
-            'art2 alb2 year2 genre2 rating2';
-            'art3 alb3 year3 genre3 rating3';
-            'art4 alb4 year4 genre4 rating4';
-            'art5 alb5 year5 genre5 rating5';
-
-        }
-        .rightcol .item1 { grid-area: artist; }
-            .rightcol .item2 { grid-area: album; }
-            .rightcol .item3 { grid-area: year; }
-            .rightcol .item4 { grid-area: genre; }
-            .rightcol .item5 { grid-area: rating; }
-
-
-        .head{
-            grid-area: header;
-            background-color:#C48F65;
-        }
-
-        /*.rightcol::before{*/
-            /*background-color: #672E3B;*/
-
-        /*}*/
-        /*.rightcol::after{*/
-            /*background-color:#C48F65;*/
-
-        }
         .wrapper {
   display: grid;
 
@@ -167,26 +136,40 @@ body {
 <div class="navbar">
     <a class="active" href="/home">Home</a>
     <a href="/youtube">Youtube</a>
-    <a href="/musix">MusixMatch</a>
-    <a href="/home">Maestro3</a>
+    <a href="/musix">MusixMatch Lyrics</a>
+    <a href="/napster">Trends</a>
 
 </div>
     </div>
 
+</div>
+    </div>
+    <div class="head" style="margin-top: 5px;
+    height: 128px;">
+        <div class="image-cropper">
+        <div id="profilepic" class="rounded"></div></div>
+            <div id="status"></div>
+        {%if sig=="Valid"%}
+            <div >Logged in as {{first}} {{last}}</div>
 
+        {%endif%}
+
+    </div>
 
 <div class="leftcol">
   <div class="login-html">
       <!--<input id="tab-3" type="radio" name="tab" class="sign-up"><label for="tab-3" class="tab">Youtube Search</label>-->
     <!--<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Most popular songs</label>-->
-    <input id="tab-1" type="radio" name="tab" class="sign-up" checked><label for="tab-1" class="tab">Search</label>
+    <input id="tab-1" type="radio" name="tab" class="sign-up" checked><label for="tab-1" class="tab"></label>
     <!--<input id="tab-3" type="radio" name="tab" class="sign-up"><label for="tab-3" class="tab">Youtube Search</label>-->
-    <div class="login-form">
+    <div class="login-form" style="position: fixed;
+    top: 35%;
+    left: 27%; width: 100%;">
 
-        <form class="sign-up-htm" action="#" id="songsearch">
+        <form class="sign-up-htm"  name="artistsearch" id="artistsearch">
         <div class="group">
           <label for="song" class="label">Song</label>
-          <input id="song" name="song" type="text" class="input" >
+          <input name="song" id="song" type="text" class="input" >
         </div>
         <div class="group">
           <input type="submit" class="button" value="Search">
@@ -200,132 +183,80 @@ body {
 
     </div>
 
+<div class="group" id="lyrics" name="lyrics" style="
+    position: fixed;
+    top: 64%;
+    width: 50%;
+    left: 28%;"></div>
+  </div>
 
-  </div>
 </div>
-<div class="rightcol">
 
-  <div id="item1" id="item1" style="color:yellow;"></div>
-  <div class="item2"id="item2" style="color:yellow;"></div>
-  <div class="item3"id="item3" style="color:yellow;"></div>
-  <div class="item4"id="item4" style="color:yellow;"></div>
-  <div class="item5"id="item5" style="color:yellow;"></div>
-    <div id="op1" class="wrapper">
-  </div>
-  <div id="op2" class="wrapper">
-  </div>
-  <div id="op3" class="wrapper">
-  </div>
-    <div id="op4" class="wrapper">
-  </div>
-    <div id="op5" class="wrapper">
-  </div>
-    </div>
-</div>
+
+
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://apis.google.com/js/client.js?onload=init"></script>
 
 
 
 
 <script>
     $(function() {
-    $("#songsearch").on("submit", function(e) {
-        e.preventDefault()
-       var track= document.getElementById("song").value;
-        $.ajax({
+
+        $("#artistsearch").on("submit", function (e) {
+            e.preventDefault();
+            var artistSearch = document.getElementById("song").value;
+            document.getElementById("lyrics").textContent = "";
+            $.ajax({
+                type: "GET",
+                data: {
+                    apikey: "40d2ea6a2e0c396154ec7257bfc0ac6b",
+                    q_track: artistSearch,
+                    format: "jsonp",
+                    callback: "jsonp_callback"
+                },
+                url: "https://api.musixmatch.com/ws/1.1/track.search",
+                dataType: "jsonp",
+                page:1,
+                page_size:1,
+                jsonpCallback: 'jsonp_callback',
+                contentType: 'application/json',
+                success: function (data) {
+
+                     getLyricsNow(data.message.body.track_list[0].track.track_id)
+
+                }
+            });
+        });
+
+    });
+
+ function getLyricsNow(id){
+    var trackId = id;
+    console.log(trackId)
+  $.ajax({
     type: "GET",
     data: {
         apikey:"40d2ea6a2e0c396154ec7257bfc0ac6b",
-        q_track: track,
+        track_id: trackId,
         format:"jsonp",
-        callback:"jsonp_callback",
-        page:1,
-        page_size:5
+        callback:"jsonp_callback"
     },
-    url: "https://api.musixmatch.com/ws/1.1/track.search",
+    url: "https://api.musixmatch.com/ws/1.1/track.lyrics.get",
     dataType: "jsonp",
     jsonpCallback: 'jsonp_callback',
     contentType: 'application/json',
-            success: function(data) {
-        var iter=0;
-        var size = Object.keys(data).length;
-        var dict = new Object();
-          $.each(data.message.body.track_list, function(msg) {
-              var temp=new Object();
-              // getsong(data.message.body.track_list[iter].track.artist_name)
-              // console.log(data.message.body.track_list[msg].track.artist_name)
-              temp['artist_name_']=data.message.body.track_list[msg].track.artist_name;
-              temp['album_name_']=data.message.body.track_list[msg].track.album_name;
-                temp['year']=data.message.body.track_list[msg].track.first_release_date;
-              if (Object.keys(data.message.body.track_list[msg].track.primary_genres.music_genre_list).length>0){
-                  temp['genre'] = data.message.body.track_list[msg].track.primary_genres.music_genre_list[0].music_genre.music_genre_name;
-              }
-              else
-              {
-                  temp['genre']="Unknown"
-              }
-                temp['rating']=data.message.body.track_list[msg].track.track_rating;
-                dict[msg]=temp
-            });
-        outputData(dict)
-        // document.getElementById("songlist1").innerHTML=op;
-          }
-    });
-    });
+    success: function(data) {
+       console.log(data);
+      var lyricsBody = data.message.body.lyrics.lyrics_body.split(/\s+/).slice(0,100).join(" ")+ "...";
 
-});
-
-function outputData(op) {
-    document.getElementById("item1").innerHTML="Artist";
-    document.getElementById("item2").innerHTML="Album";
-    document.getElementById("item3").innerHTML="Year";
-    document.getElementById("item4").innerHTML="Genre";
-    document.getElementById("item5").innerHTML="Rating";
-
-  var op1 = document.getElementById("op1");
-  var op2 = document.getElementById("op2");
-  var op3 = document.getElementById("op3");
-  var op4 = document.getElementById("op4");
-  var op5 = document.getElementById("op5");
-
-  for (i = 0; i < 5; i++) {
-
-    var array1 = op[i]['artist_name_'];
-    var array2 = op[i]['album_name_'];
-    var array3 = op[i]['year'];
-    var array4 = op[i]['genre'];
-    var array5 = op[i]['rating'];
-
-    var node1 = document.createElement("div");
-    var node2 = document.createElement("div");
-    var node3 = document.createElement("div");
-    var node4 = document.createElement("div");
-    var node5 = document.createElement("div");
-
-    var artist = array1;
-    var album = array2;
-    var year = array3;
-    var genre = array4;
-    var rating = array5;
-
-    var textnode1 = document.createTextNode(artist);
-    var textnode2 = document.createTextNode(album);
-    var textnode3 = document.createTextNode(year);
-    var textnode4 = document.createTextNode(genre);
-    var textnode5 = document.createTextNode(rating);
-
-    node1.appendChild(textnode1);
-    node2.appendChild(textnode2);
-    node3.appendChild(textnode3);
-    node4.appendChild(textnode4);
-    node5.appendChild(textnode5);
-
-    op1.appendChild(node1);
-    op2.appendChild(node2);
-    op3.appendChild(node3);
-    op4.appendChild(node4);
-    op5.appendChild(node5);
-
-  }
+      console.log(lyricsBody)
+        var j = document.createElement("p")
+        j.textContent = lyricsBody
+        document.getElementById("lyrics").appendChild(j)
+    }
+  });
  };
 </script>
 

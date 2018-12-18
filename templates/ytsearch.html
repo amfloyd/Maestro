@@ -23,6 +23,22 @@
     background-color: #555;
 }
 
+        .image-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+img {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+}
+
+
 .content {
     padding: 0 18px;
     display: none;
@@ -30,52 +46,20 @@
     background-color: #2f435e;
 }
 
-body {
-    display: grid;
-    grid-template-rows:1fr;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:'header header'
-                        'searchmusix display';
+        .image-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
 }
-        .leftcol{
-            grid-area: searchmusix;
-            background-color:#2f435e;
-        }
 
-        .rightcol{
-            grid-area: display;
-            margin-top: 120px;
-            margin-left: 150px;
-            background-color: #34495E;
-            display:grid ;
-            grid-auto-flow: column;
-            grid-template-areas:'artist album year genre rating'
-                        'art1 alb1 year1 genre1 rating1';
-            'art2 alb2 year2 genre2 rating2';
-            'art3 alb3 year3 genre3 rating3';
-            'art4 alb4 year4 genre4 rating4';
-            'art5 alb5 year5 genre5 rating5';
-
-        }
-        .rightcol .item1 { grid-area: artist; }
-            .rightcol .item2 { grid-area: album; }
-            .rightcol .item3 { grid-area: year; }
-            .rightcol .item4 { grid-area: genre; }
-            .rightcol .item5 { grid-area: rating; }
-
-
-        .head{
-            grid-area: header;
-            background-color:#C48F65;
-        }
-
-        /*.rightcol::before{*/
-            /*background-color: #672E3B;*/
-
-        /*}*/
-        /*.rightcol::after{*/
-            /*background-color:#C48F65;*/
-
+img {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+}
 
         .wrapper {
   display: grid;
@@ -91,18 +75,93 @@ body {
 
 </head>
 <body>
+<script >
+    function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+
+    if (response.status === 'connected') {
+      testAPI();
+    } else {
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    }
+  }
+
+
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  function logout(){
+      console.log("here")
+      FB.logout(function(response) {
+   // Person is now logged out
+});
+  }
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1181204532036224',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v3.2'
+    });
+
+
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me','GET', {fields: 'name,id,picture.width(90).height(90)'}, function(response) {
+        console.log(response)
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Logged in as ' + response.name;
+      document.getElementById('profilepic').innerHTML = "<img src='" + response.picture.data.url + "'>";
+    });
+  };
+</script>
 <div class="head">
 <div class="navbar">
     <a class="active" href="/home">Home</a>
     <a href="/youtube">Youtube</a>
     <a href="/musix">MusixMatch</a>
-    <a href="/home">Maestro3</a>
+    <a href="/home">Trends</a>
 
 </div>
     </div>
+</div>
+    <div class="head" style="margin-top: 5px;
+    height: 128px;">
+        <div class="image-cropper">
+        <div id="profilepic" class="rounded"></div></div>
+            <div id="status"></div>
+        {%if sig=="Valid"%}
+            <div >Logged in as {{first}} {{last}}</div>
+
+        {%endif%}
+
+    </div>
 
   <div class="leftcol">
-  <div class="login-html">
+  <div class="login-html" style="top: 30%; left: 27.5%; position: fixed; overflow: scroll">
       <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Search for Videos</label>
       <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Suggested Videos</label>
     <div class="login-form">

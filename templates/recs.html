@@ -15,7 +15,7 @@
     color: black;
     cursor: pointer;
     padding: 18px;
-    width:700px;
+    width:400px;
     text-align: left;
     outline: none;
     font-size: 15px;
@@ -42,12 +42,12 @@ body {
 
     display: grid;
 grid-gap: 1rem;
-grid-template-columns: 1fr 5fr 2.5fr;
-grid-template-rows: 1fr 5fr 1fr;
+grid-template-columns:  5fr 2.5fr;
+grid-template-rows: 1fr 5fr 2.5fr;
 grid-template-areas:
-"header header header"
-"sidebar searchmusix aside"
-"sidebar footer footer";
+" header header"
+" searchmusix aside"
+" footer footer";
 }
         .leftcolup{
             grid-area: searchmusix;
@@ -197,7 +197,7 @@ img {
     <a class="active" href="/home">Home</a>
     <a href="/youtube">Youtube</a>
     <a href="/musix">MusixMatch</a>
-    <a href="/home">Maestro3</a>
+    <a href="/napster">Napster</a>
 
 </div>
     </div>
@@ -221,13 +221,22 @@ img {
       <!--<input id="tab-3" type="radio" name="tab" class="sign-up"><label for="tab-3" class="tab">Youtube Search</label>-->
     <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Most popular songs</label>
     <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Search</label>
+
     <!--<input id="tab-3" type="radio" name="tab" class="sign-up"><label for="tab-3" class="tab">Youtube Search</label>-->
     <div class="login-form">
 
-        <form class="sign-up-htm" action="#" id="songsearch">
+        <form class="sign-up-htm" id="songsearch">
         <div class="group">
           <label for="song" class="label">Song</label>
           <input id="song" name="song" type="text" class="input" >
+             <label for="artist" class="label">Artist</label>
+          <input id="artist" name="artist" type="text" class="input" >
+            <label for="lyrics" class="label">Search by lyrics</label>
+          <input id="lyrics" name="lyrics" type="text" class="input" >
+            <label for="randsearch" class="label">Search by what you remember</label>
+          <input id="randsearch" name="randsearch" type="text" class="input" >
+
+
         </div>
         <div class="group">
           <input type="submit" class="button" value="Search">
@@ -239,7 +248,7 @@ img {
       </form>
 
 
-        <div class="sign-in-htm" style="width: 700px;">
+        <div class="sign-in-htm" >
         {%if correct%}
 
                <button id=0 onclick="init(this.id)"  class="collapsible">{{songlist[0]}}</button>
@@ -267,12 +276,9 @@ img {
         </div>
     </div>
 
-
   </div>
 </div>
 
-<div class="sidebar" id="sidebar">
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a></p>&mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
 <div class="rightcol" id="rightcol">
 
@@ -304,10 +310,7 @@ img {
         getvid(id)
     });
 }
-
     function tplawesome(e,t){res=e;for(var n=0;n<t.length;n++){res=res.replace(/\{\{(.*?)\}\}/g,function(e,r){return t[n][r]})}return res}
-
-
    function getvid(id) {
        var search=document.getElementById(id).innerText
        // console.log("reached here",songvid.innerText)
@@ -325,16 +328,13 @@ img {
           $("#"+string).html("");
           $.each(results.items, function(index, item) {
               $.get("/display", function(data) {
+                  console.log(data);
                 $("#"+string).append(tplawesome(data, [{"title":item.snippet.title, "videoid":item.id.videoId}]));
                 // document.getElementById("results").innerHTML
             });
           });
        });
-
 };
-
-
-
 </script>
 
 
@@ -344,11 +344,17 @@ img {
     $("#songsearch").on("submit", function(e) {
         e.preventDefault();
        var track= document.getElementById("song").value;
+       var artist= document.getElementById("artist").value;
+       var lyrics= document.getElementById("lyrics").value;
+       var rand= document.getElementById("randsearch").value;
         $.ajax({
     type: "GET",
     data: {
         apikey:"40d2ea6a2e0c396154ec7257bfc0ac6b",
         q_track: track,
+        q_artist:artist,
+        q_lyrics:lyrics,
+        q:rand,
         format:"jsonp",
         callback:"jsonp_callback",
         s_track_rating:"desc",
